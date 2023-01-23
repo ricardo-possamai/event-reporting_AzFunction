@@ -16,7 +16,7 @@ pipeline  {
             steps{
             // login Azure
             
-            sh 'cd /var/lib/jenkins/workspace/event-reporting_AzFunction/target/azure-functions/event-reporting-20230120091857774 && zip -r ../../../archive.zip ./* && cd ../../../'
+            sh 'cd /var/lib/jenkins/workspace/event-reporting_AzFunction/target/azure-functions/event-reporting-20230120091857774 && sudo zip -r ../../../archive.zip ./* && cd ../../../'
             sh "az functionapp deployment source config-zip -g 'az_functions' -n 'azfunctionswin' --src archive.zip"
          
         }
