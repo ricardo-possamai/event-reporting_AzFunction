@@ -25,7 +25,7 @@ pipeline  {
                 
             '''
             }
-            sh 'cd $PWD/target/azure-functions/event-reporting_AzFunction && zip -r ../../../archive.zip ./* && cd -'
+            sh 'cd /var/lib/jenkins/workspace/event-reporting_AzFunction/target/azure-functions/event-reporting_AzFunction && zip -r ../../../archive.zip ./* && cd ../../../'
             sh "az functionapp deployment source config-zip -g 'az_functions' -n 'javateste' --src archive.zip"
             sh 'az logout'
         }
