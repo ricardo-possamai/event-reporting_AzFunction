@@ -21,7 +21,7 @@ pipeline  {
                             string(credentialsId: 'AZ_TENANT', variable: 'aztenant'), 
                             ]) {
             sh '''
-               sh 'az account list'
+               sh 'az login --service-principal --username $azuser --password $azpass --tenant $aztenant'
             '''
             }
             sh 'cd /var/lib/jenkins/workspace/event-reporting_AzFunction/target/azure-functions/event-reporting-20230120091857774 && zip -r ../../../archive.zip ./* && cd ../../../'
