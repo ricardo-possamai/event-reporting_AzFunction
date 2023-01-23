@@ -14,16 +14,8 @@ pipeline  {
 
         stage('Publish') {
             steps{
-            // login Azure sh 'az login --service-principal --username $azuser --password $azpass --tenant $aztenant'
-            withCredentials([
-                            string(credentialsId: 'AZ_USER', variable: 'azuser'),
-                            string(credentialsId: 'AZ_PASS', variable: 'azpass'),
-                            string(credentialsId: 'AZ_TENANT', variable: 'aztenant'), 
-                            ]) {
-            sh '''
-               sh 'az login --service-principal --username $azuser --password $azpass --tenant $aztenant'
-            '''
-            }
+            // login Azure
+            
             sh 'cd /var/lib/jenkins/workspace/event-reporting_AzFunction/target/azure-functions/event-reporting-20230120091857774 && zip -r ../../../archive.zip ./* && cd ../../../'
             sh "az functionapp deployment source config-zip -g 'az_functions' -n 'azfunctionswin' --src archive.zip"
             sh 'az logout'
