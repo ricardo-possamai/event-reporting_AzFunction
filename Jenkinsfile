@@ -14,14 +14,13 @@ pipeline  {
 
         stage('Publish') {
             steps{
-            // login Azure
+            // login Azure sh 'az login --service-principal --username $azuser --password $azpass --tenant $aztenant'
             withCredentials([
                             string(credentialsId: 'AZ_USER', variable: 'azuser'),
                             string(credentialsId: 'AZ_PASS', variable: 'azpass'),
                             string(credentialsId: 'AZ_TENANT', variable: 'aztenant'), 
                             ]) {
             sh '''
-               // sh 'az login --service-principal --username $azuser --password $azpass --tenant $aztenant'
                sh 'az account list'
             '''
             }
